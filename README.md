@@ -14,3 +14,6 @@ meaning highest hitvalues are calculated first
 then the lower ones
 
 this calc does not take into account non FC scores
+
+## demo
+https://0x4kgi.github.io/js-mania-calc/
