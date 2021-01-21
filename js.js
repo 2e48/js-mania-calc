@@ -78,8 +78,18 @@ let mods = {
 
 let maxScore = 1000000;
 
-$(document).ready(function() {
-	$("input").change(prepCalc);
+function ready(fn) {
+	if (document.readyState !== 'loading') {
+		fn();
+	} else {
+		document.addEventListener('DOMContentLoaded', fn);
+	}
+}
+
+ready(function() {
+	document.querySelectorAll("input").forEach((input) => {
+		input.addEventListener("change", prepCalc);
+	});
 });
 
 let _bonus = 100;
@@ -96,12 +106,12 @@ let _total = 0;
 
 function prepCalc() {
 	
-	_miss = parseInt($("input#txtMiss").val());
-	_50 = parseInt($("input#txt50").val());
-	_100 = parseInt($("input#txt100").val());
-	_200 = parseInt($("input#txt200").val());
-	_300 = parseInt($("input#txt300").val());
-	_320 = parseInt($("input#txt320").val());
+	_miss = parseInt(document.querySelector("input#txtMiss").value);
+	_50 = parseInt(document.querySelector("input#txt50").value);
+	_100 = parseInt(document.querySelector("input#txt100").value);
+	_200 = parseInt(document.querySelector("input#txt200").value);
+	_300 = parseInt(document.querySelector("input#txt300").value);
+	_320 = parseInt(document.querySelector("input#txt320").value);
 	
 	let hArray = [		
 		["MAX", _320],
@@ -150,7 +160,7 @@ function calc(hArray) {
 		
 		
 	});	
-	$("input#txtScore").val(_score.toFixed(0));
+	document.querySelector("input#txtScore").value = _score.toFixed(0);
 }
 
 function accCalc() {
@@ -163,5 +173,5 @@ function accCalc() {
 		
 	let acc = (points / (hits * 300)) * 100;
 	
-	$("input#txtAcc").val(acc.toFixed(2));
+	document.querySelector("input#txtAcc").value = acc.toFixed(2);
 }
