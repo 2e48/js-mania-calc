@@ -16,4 +16,4 @@ then the lower ones
 this calc does not take into account non FC scores
 
 ## demo
-https://0x4kgi.github.io/js-mania-calc/
+https://2e48.github.io/js-mania-calc/
