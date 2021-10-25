@@ -1,4 +1,4 @@
-let judgement = {
+const judgement = {
 	MAX: {
 		hitValue: 320,
 		hitBonusValue: 32,
@@ -164,6 +164,8 @@ function calc(hArray) {
 }
 
 function accCalc() {
+	// TODO: fix this lol
+
 	let hits = _total;
 	let points = (50 * _50)
 		+ (100 * _100)
@@ -173,5 +175,7 @@ function accCalc() {
 
 	let acc = (points / (hits * 300)) * 100;
 
+
+	// TODO: why this thing brokie?
 	document.getElementById("txtAcc").value = acc.toFixed(2);
 }
