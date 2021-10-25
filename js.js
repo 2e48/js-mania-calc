@@ -37,7 +37,7 @@ let judgement = {
 	},
 };
 
-let mods = {
+const mods = {
 	Easy: {
 		ModMultiplier: 0.5,
 		ModDivider: 1,
@@ -76,7 +76,7 @@ let mods = {
 	},
 }
 
-let maxScore = 1000000;
+const maxScore = 1000000;
 
 function ready(fn) {
 	if (document.readyState !== 'loading') {
@@ -86,7 +86,7 @@ function ready(fn) {
 	}
 }
 
-ready(function() {
+ready(function () {
 	document.querySelectorAll("input").forEach((input) => {
 		input.addEventListener("change", prepCalc);
 	});
@@ -105,24 +105,24 @@ let _320 = 0;
 let _total = 0;
 
 function prepCalc() {
-	
-	_miss = parseInt(document.querySelector("input#txtMiss").value);
-	_50 = parseInt(document.querySelector("input#txt50").value);
-	_100 = parseInt(document.querySelector("input#txt100").value);
-	_200 = parseInt(document.querySelector("input#txt200").value);
-	_300 = parseInt(document.querySelector("input#txt300").value);
-	_320 = parseInt(document.querySelector("input#txt320").value);
-	
-	let hArray = [		
+
+	const _miss = parseInt(document.getElementById("txtMiss").value);
+	const _50 = parseInt(document.getElementById("txt50").value);
+	const _100 = parseInt(document.getElementById("txt100").value);
+	const _200 = parseInt(document.getElementById("txt200").value);
+	const _300 = parseInt(document.getElementById("txt300").value);
+	const _320 = parseInt(document.getElementById("txt320").value);
+
+	let hArray = [
 		["MAX", _320],
 		["300", _300],
 		["200", _200],
 		["100", _100],
 		["50", _50],
-		["MISS", _miss],		
-	];	
+		["MISS", _miss],
+	];
 	_total = _miss + _50 + _100 + _200 + _300 + _320;
-	
+
 	calc(hArray);
 	accCalc();
 }
@@ -131,36 +131,36 @@ function calc(hArray) {
 	//reset
 	_score = 0;
 	_bonus = 100;
-	
+
 	hArray.forEach((data, index) => {
 		let hit = data[0];
 		let count = data[1];
-		
-		for(let _i = 0; _i < count; _i++) {
+
+		for (let _i = 0; _i < count; _i++) {
 			let __in = (maxScore * 1 * 0.5 / _total)
-			
-			let __bs =  __in
+
+			let __bs = __in
 				* (judgement[hit].hitValue / 320);
-				
+
 			_bonus = Math.max(
-				0, 
+				0,
 				Math.min(
 					100,
-					_bonus 
-						+ judgement[hit].hitBonus 
-						- judgement[hit].hitPunishment
+					_bonus
+					+ judgement[hit].hitBonus
+					- judgement[hit].hitPunishment
 				)
 			);
-			
-			let __bns = __in 
+
+			let __bns = __in
 				* (judgement[hit].hitBonusValue * Math.sqrt(_bonus) / 320);
-				
+
 			_score += __bs + __bns;
 		}
-		
-		
-	});	
-	document.querySelector("input#txtScore").value = _score.toFixed(0);
+
+
+	});
+	document.getElementById("txtScore").value = _score.toFixed(0);
 }
 
 function accCalc() {
@@ -170,8 +170,8 @@ function accCalc() {
 		+ (200 * _200)
 		+ (300 * _300)
 		+ (300 * _320);
-		
+
 	let acc = (points / (hits * 300)) * 100;
-	
-	document.querySelector("input#txtAcc").value = acc.toFixed(2);
+
+	document.getElementById("txtAcc").value = acc.toFixed(2);
 }
